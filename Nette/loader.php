@@ -141,7 +141,6 @@ require __DIR__ . '/IO/SafeStream.php';
 require __DIR__ . '/iterators/GenericRecursiveIterator.php';
 require __DIR__ . '/iterators/InstanceFilterIterator.php';
 require __DIR__ . '/iterators/SmartCachingIterator.php';
-require __DIR__ . '/Loaders/AutoLoader.php';
 require __DIR__ . '/Loaders/LimitedScope.php';
 require __DIR__ . '/Loaders/RobotLoader.php';
 require __DIR__ . '/Mail/MailMimePart.php';
