@@ -42,16 +42,25 @@ $application->errorPresenter = 'Error';
 // Step 4: Setup application router
 $router = $application->getRouter();
 
-$router[] = new Route('index.php', array(
-	'presenter' => 'Homepage',
-	'action' => 'default',
-), Route::ONE_WAY);
-
-$router[] = new Route('<presenter>/<action>/<id>', array(
-	'presenter' => 'Homepage',
-	'action' => 'default',
-	'id' => NULL,
-));
+// mod_rewrite detection
+// FastCGI prefixes environment variables
+if (isset($_SERVER['NETTE_MOD_REWRITE']) || isset($_SERVER['REDIRECT_NETTE_MOD_REWRITE'])) {
+	$router[] = new Route('index.php', array(
+		'presenter' => 'Homepage',
+		'action' => 'default',
+	), Route::ONE_WAY);
+	
+	$router[] = new Route('<presenter>/<action>/<id>', array(
+		'presenter' => 'Homepage',
+		'action' => 'default',
+		'id' => NULL,
+	));
+} else {
+	$router[] = new SimpleRouter(array(
+		'presenter' => 'Homepage',
+		'action' => 'default',
+	));
+}
 
 
 
