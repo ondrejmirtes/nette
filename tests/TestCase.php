@@ -3,11 +3,6 @@
 use Nette\ObjectMixin;
 
 /**
- * Load PHPUnit Framework (from the include_path).
- */
-require_once('PHPUnit/Framework.php');
-
-/**
  * All tests should extend this class. It provides Nette\Object functionality.
  * @author	Nette Foundation
  * @package    Nette\Test  

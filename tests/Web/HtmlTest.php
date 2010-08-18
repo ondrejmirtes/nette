@@ -18,7 +18,7 @@ class HtmlTest extends \TestCase
 		$el = Html::el('img')->src('image.gif')->alt('');
 		$this->assertEquals('<img src="image.gif" alt="" />', (string) $el);
 		$this->assertEquals('<img src="image.gif" alt="" />', $el->startTag());
-		$this->assertEquals('', $el->endTag());
+		$this->assertEmpty($el->endTag());
 		$this->assertEquals('image.gif', $el->getSrc());
 		$this->assertNull($el->getTitle());
 	}
@@ -28,7 +28,7 @@ class HtmlTest extends \TestCase
 		$el = Html::el('img')->src('image.gif')->alt('')->setText(NULL)->setText('any content');
 		$this->assertEquals('<img src="image.gif" alt="" />', (string) $el);
 		$this->assertEquals('<img src="image.gif" alt="" />', $el->startTag());
-		$this->assertEquals('', $el->endTag());
+		$this->assertEmpty($el->endTag());
 	}
 	
 	public function testSingleTagInHtmlDoctype()
