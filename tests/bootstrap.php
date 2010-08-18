@@ -32,6 +32,11 @@ require_once(__DIR__ . '/../Nette/loader.php');
 Debug::enable();
 
 /**
+ * Miscellanous PHP settings
+ */
+date_default_timezone_set('Europe/Prague');
+
+/**
  * Load TestCase class
  */
 require_once(__DIR__ . '/TestCase.php');
