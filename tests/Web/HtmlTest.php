@@ -3,8 +3,6 @@
 namespace Nette\Web;
 
 /**
- * Test: Nette\Web\Html basic usage.
- *
  * @author     Nette Foundation
  * @category   Nette
  * @package    Nette\Web
