@@ -28,10 +28,12 @@ class MemcachedStorageTest extends CacheStorageTest
 
 	public function clearCache()
 	{
-		$memcache = new \Memcache();
-		$memcache->connect('localhost');
-		$memcache->flush();
-		$memcache->close();
+		if (MemcachedStorage::isAvailable()) {
+			$memcache = new \Memcache();
+			$memcache->connect('localhost');
+			$memcache->flush();
+			$memcache->close();
+		}
 
 		parent::clearCache();
 	}
