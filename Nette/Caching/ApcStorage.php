@@ -88,7 +88,7 @@ class ApcStorage implements ICacheStorage
 
 		if (!empty($meta[self::META_DELTA])) {
 			apc_delete($key);
-			apc_store($key, $meta, 0, $meta[self::META_DELTA] + time());
+			apc_store($key, $meta, $meta[self::META_DELTA] + time());
 		}
 
 		return $meta[self::META_DATA];
@@ -105,7 +105,7 @@ class ApcStorage implements ICacheStorage
 	 */
 	public function write($key, $data, array $dp)
 	{
-		if (!empty($dp[Cache::TAGS]) || isset($dp[Cache::PRIORITY]) || !empty($dp[Cache::ITEMS])) {
+		if (!empty($dp[Cache::ITEMS])) {
 			throw new \NotSupportedException('Dependent items are not supported by ApcStorage.');
 		}
 
