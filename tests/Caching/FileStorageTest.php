@@ -28,7 +28,7 @@ class FileStorageTest extends \TestCase
 
 	public static function tearDownAfterClass()
 	{
-		rmrf(Nette\Environment::getVariable('tempDir'));
+		self::removeDirectory(Nette\Environment::getVariable('tempDir'));
 	}
 
 	protected $cache;

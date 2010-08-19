@@ -126,6 +126,7 @@ class SessionNamespaceTest extends \TestCase
 		
 		$namespace = $session->getNamespace('expireSingle');
 		$this->assertEquals('plum', $namespace->p);
+		$this->assertNull($namespace->g);
 	}
 
 }

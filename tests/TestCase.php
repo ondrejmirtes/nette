@@ -11,6 +11,32 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 {
 
 	/**********************************************
+	 *	      Helper functions
+	 **********************************************/
+
+	/**
+	 * Removes specified path inlucing contents of the directory.
+	 * @param string
+	 */
+	protected static function removeDirectory($path)
+	{
+		if (is_dir($path)) {
+			foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
+				if ($entry->isDir() && $entry->getBasename() !== '.' && $entry->getBasename() !== '..') {
+					rmdir($entry);
+				} else if ($entry->isFile()) {
+					unlink($entry);
+				}
+			}
+
+			rmdir($path);
+
+		} else {
+			unlink($path);
+		}
+	}
+
+	/**********************************************
 	 *	      Nette\Object functionality
 	 **********************************************/
 	
