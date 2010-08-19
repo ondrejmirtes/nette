@@ -40,3 +40,25 @@ date_default_timezone_set('Europe/Prague');
  * Load TestCase class
  */
 require_once(__DIR__ . '/TestCase.php');
+
+/**
+ * Helper function
+ * @param string
+ */
+function rmrf($path)
+{
+	if (is_dir($path)) {
+		foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
+			if ($entry->isDir() && $entry->getBasename() !== '.' && $entry->getBasename() !== '..') {
+				rmdir($entry);
+			} else if ($entry->isFile()) {
+				unlink($entry);
+			}
+		}
+
+		rmdir($path);
+
+	} else {
+		unlink($path);
+	}
+}
