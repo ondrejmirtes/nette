@@ -23,7 +23,7 @@ use Nette;
  * @copyright  Copyright (c) 2004, 2010 David Grudl
  * @package    Nette\Caching
  */
-class ApcStorage implements ICacheStorage
+abstract class ApcStorage implements ICacheStorage
 {
 	/**#@+ @internal cache structure */
 	const META_CALLBACKS = 'callbacks';

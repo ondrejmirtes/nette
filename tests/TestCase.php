@@ -5,8 +5,8 @@ use Nette\ObjectMixin;
 /**
  * All tests should extend this class. It provides Nette\Object functionality.
  * @author	Nette Foundation
- * @package    Nette\Test  
- */ 
+ * @package    Nette\Test
+ */
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {
 
@@ -25,7 +25,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 				if ($entry->isDir() && $entry->getBasename() !== '.' && $entry->getBasename() !== '..') {
 					rmdir($entry);
 				} else if ($entry->isFile()) {
-					unlink($entry);
+					@unlink($entry); // some files (eg. cachejournal.db in temp) might be locked
 				}
 			}
 		}
@@ -34,7 +34,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 	/**********************************************
 	 *	      Nette\Object functionality
 	 **********************************************/
-	
+
 	/**
 	 * Access to reflection.
 	 * @return Nette\Reflection\ClassReflection
@@ -68,7 +68,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 		$class = get_called_class();
 		throw new \MemberAccessException("Call to undefined static method $class::$name().");
 	}
-	
+
 	/**
 	 * Returns property value. Do not call directly.
 	 * @param  string  property name
