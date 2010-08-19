@@ -12,11 +12,6 @@ require_once __DIR__ . '/CacheStorageTest.php';
  */
 class MemcachedStorageTest extends CacheStorageTest
 {
-	protected $cache;
-
-	protected $key = 'nette';
-	protected $value = 'rulez';
-
 	public function setUp()
 	{
 		if (!MemcachedStorage::isAvailable()) {
