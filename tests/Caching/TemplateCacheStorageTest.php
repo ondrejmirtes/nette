@@ -12,21 +12,6 @@ use Nette, Nette\Caching\Cache;
  */
 class TemplateCacheStorageTest extends \TestCase
 {
-	public static function setUpBeforeClass()
-	{
-		Nette\Environment::setVariable('tempDir', __DIR__ . '/tmp');
-
-		if (!@mkdir(Nette\Environment::getVariable('tempDir'), 0755) &&
-			!is_dir(Nette\Environment::getVariable('tempDir')))
-		{
-			throw new \Exception('Cannot create ' . Nette\Environment::getVariable('tempDir') . '.');
-		}
-	}
-
-	public static function tearDownAfterClass()
-	{
-		self::removeDirectory(Nette\Environment::getVariable('tempDir'));
-	}
 
 	protected $cache;
 
@@ -35,7 +20,12 @@ class TemplateCacheStorageTest extends \TestCase
 
 	public function setUp()
 	{
-		$this->cache = new Cache(new TemplateCacheStorage(Nette\Environment::getVariable('tempDir')));
+		$this->cache = new Cache(new TemplateCacheStorage(__DIR__ . '/../temp'));
+	}
+
+	public function tearDown()
+	{
+		$this->truncateDirectory(__DIR__ . '/../temp');
 	}
 
 	public function testBasicFunctionality()
@@ -61,4 +51,3 @@ class TemplateCacheStorageTest extends \TestCase
 	}
 }
 
-// vim: noexpandtab softtabstop=4 tabstop=4 shiftwidth=4 nolist

@@ -2,9 +2,6 @@
 
 namespace Nette\Caching;
 
-use Nette;
-
-
 /**
  * @author     Nette Foundation
  * @category   Nette
@@ -13,23 +10,6 @@ use Nette;
  */
 class FileStorageTest extends \TestCase
 {
-	public static function setUpBeforeClass()
-	{
-		// FIXME: FileStorage should not be dependent on tempDir through 
-		// ICacheJournal
-		Nette\Environment::setVariable('tempDir', __DIR__ . '/tmp');
-
-		if (!@mkdir(Nette\Environment::getVariable('tempDir'), 0755) &&
-			!is_dir(Nette\Environment::getVariable('tempDir')))
-		{
-			throw new \Exception('Cannot create ' . Nette\Environment::getVariable('tempDir') . '.');
-		}
-	}
-
-	public static function tearDownAfterClass()
-	{
-		self::removeDirectory(Nette\Environment::getVariable('tempDir'));
-	}
 
 	protected $cache;
 	protected $key;
@@ -37,9 +17,14 @@ class FileStorageTest extends \TestCase
 
 	public function setUp()
 	{
-		$this->cache = new Cache(new FileStorage(Nette\Environment::getVariable('tempDir')));
+		$this->cache = new Cache(new FileStorage(__DIR__ . '/../temp'));
 		$this->key = '../' . implode('', range("\x00", "\x1F"));
 		$this->value = range("\x00", "\x1F");
+	}
+
+	public function tearDown()
+	{
+		$this->truncateDirectory(__DIR__ . '/../temp');
 	}
 
 	public function testNotCached()
@@ -235,7 +220,7 @@ class FileStorageTest extends \TestCase
 
 	public function testFileDependency()
 	{
-		$file = Nette\Environment::getVariable('tempDir') . '/foo';
+		$file = __DIR__ . '/../temp/foo';
 		@unlink($file);
 
 		$this->cache->save($this->key, $this->value, array(
@@ -374,4 +359,3 @@ class FileStorageTest extends \TestCase
 	}
 }
 
-// vim: noexpandtab softtabstop=4 tabstop=4 shiftwidth=4 nolist

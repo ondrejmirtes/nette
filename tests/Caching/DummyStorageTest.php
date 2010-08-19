@@ -57,4 +57,3 @@ class DummyStorageTest extends \TestCase
 	}
 }
 
-// vim: noexpandtab softtabstop=4 tabstop=4 shiftwidth=4 nolist

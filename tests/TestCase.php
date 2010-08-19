@@ -18,7 +18,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 	 * Removes specified path inlucing contents of the directory.
 	 * @param string
 	 */
-	protected static function removeDirectory($path)
+	protected static function truncateDirectory($path)
 	{
 		if (is_dir($path)) {
 			foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
@@ -28,11 +28,6 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 					unlink($entry);
 				}
 			}
-
-			rmdir($path);
-
-		} else {
-			unlink($path);
 		}
 	}
 

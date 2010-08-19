@@ -43,6 +43,8 @@ if ($session->isStarted()) {
 }
 $session->start();
 
+define('APP_DIR', __DIR__);
+
 /**
  * Load TestCase class
  */

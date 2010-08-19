@@ -26,7 +26,7 @@ class MemcachedStorageTest extends \TestCase
 
 	public function testExpiration()
 	{
-		$this->cache->save($this->key, $this->values, array(
+		$this->cache->save($this->key, $this->value, array(
 			Cache::EXPIRE => time() + 2,
 		));
 		$this->cache->release();
@@ -43,7 +43,7 @@ class MemcachedStorageTest extends \TestCase
 
 	public function testFileDependency()
 	{
-		$file = Nette\Environment::getVariable('tempDir') . '/foo';
+		$file = __DIR__ . '/../temp/foo.tmp';
 		@unlink($file);
 
 		$this->cache->save($this->key, $this->value, array(
@@ -145,4 +145,3 @@ class MemcachedStorageTest extends \TestCase
 	}
 }
 
-// vim: noexpandtab softtabstop=4 tabstop=4 shiftwidth=4 nolist
