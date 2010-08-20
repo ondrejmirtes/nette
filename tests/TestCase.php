@@ -15,7 +15,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 	 **********************************************/
 
 	/**
-	 * Removes specified path inlucing contents of the directory.
+	 * Removes specified path including contents of the directory.
 	 * @param string
 	 */
 	protected static function truncateDirectory($path)
@@ -24,7 +24,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 			foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST) as $entry) {
 				if ($entry->isDir() && $entry->getBasename() !== '.' && $entry->getBasename() !== '..') {
 					rmdir($entry);
-				} else if ($entry->isFile()) {
+				} else if ($entry->isFile() && $entry->getFilename() !== '.gitignore') {
 					@unlink($entry); // some files (eg. cachejournal.db in temp) might be locked
 				}
 			}
